@@ -13,6 +13,7 @@ from random import random
 
 from random import choices
 
+'''
 true_count = [0,0]
 for n in range(20):
     attempt = choices(["PERSON INCOMING", "ALL GOOD"], weights=[0.1, 0.9], k=1)
@@ -21,82 +22,77 @@ for n in range(20):
         true_count[0] = true_count[0] + 1
     elif attempt == "ALL GOOD":
         true_count[1] = true_count[1] + 1
-
-
+    print(true_count)
 '''
-
 
 sleeper = 1
 
-def format_respons(response):
-    response = response.lower().strip()
-    return response
-def check_if_int(response):
-    print("you said:\t%s" % required_floor) 
-    try:
-        return int(response)
-    except:
-        return 
+print("Hello and welcome to the !@#=%+ Building")
 
 number_of_floors = randint(5,10)
-print("there are %s floors in this building" % number_of_floors)
+print("There are %s floors in this building" % number_of_floors)
 time.sleep(sleeper)
 
 elevator_starts_on = randint(0,number_of_floors) # a <= N <= b
-print("the elevator is on floor %s" %elevator_starts_on)
+print("The elevator is currently on floor %s" %elevator_starts_on)
 time.sleep(sleeper)
 
-person_counter = 1
-people_and_floors = {"person %s" % person_counter:0}
+#person_counter = 1
+#people_and_floors = {"person %s" % person_counter:0}
+
+########################
+
+sleeper = 1
+
+def format_response(response):
+    response = response.lower().strip()
+    try:
+        return int(response)
+    except:
+        response = False
+        return  response
 
 
-while True: 
-    required_floor = format_respons(input("you are on the ground floor (0) - what floor do you need?\t"))
-    required_floor = check_if_int(required_floor)
-    if isinstance(required_floor,int) and required_floor <= number_of_floors:
-        if required_floor < 1:
-            print("\ni guess you didn't need the elevator after all...you wont learn about elevators today")
-            time.sleep(3)
-            exit()
-        else:
-            print("great!\n")
-            time.sleep(2)
-        break
-    else:
-        print('please give an appropriate floor number...') 
-        time.sleep(1)
+required_floor = False
+while required_floor == False or required_floor > number_of_floors:
+    required_floor = format_response(input("What floor do you need? (you are currently on ground floor (0)\t"))
+    if not required_floor or required_floor > number_of_floors: print("Hmmm that is not an appropriate repsonse - please try again...")
+print("You said you need to go to floor:\t%s" % required_floor) 
 
+########################
 
-for n in range(elevator_starts_on, people_and_floors['person 1'] - 1, -1):
-    if required_floor < 1:
-        exit()
-    elif n == 0:
-        print(n)
+print("\nLift going down\n")
+
+for n in range(elevator_starts_on, -1, -1):
+    time.sleep(1)
+    print(n)
+    if n == 0:
         time.sleep(1)
         print("\nBZZZ ground floor")
         time.sleep(2)
         print("*doors open for you*")
         time.sleep(3)
-    else:
-        print(n)
-        time.sleep(sleeper)
-        attempt = choice([True, False])
-        print(attempt)
+    #else:
+    #    print(n)
+    #    time.sleep(sleeper)
+    #    attempt = choice([True, False])
+    #    print(attempt)
     
-print("\nheading to floor %s\n" % required_floor)
+#print("\nlift going up to floor %s\n" % required_floor)
+print("\nLift going up\n")
 time.sleep(2)
 
 for n in range(required_floor+1):
     print(n)
     time.sleep(sleeper)
+    if n == required_floor:
+        time.sleep(1)
+        print("BZZZ floor %s" % required_floor)
+        time.sleep(2)
+        print("*doors open for you*")
+        time.sleep(2)
+        print("thank you for using the elevator - have a great day!")
+        time.sleep(4)
 
-time.sleep(1)
-print("\nBZZZ floor %s" % required_floor)
-time.sleep(2)
-print("*doors open for you*")
-time.sleep(3)
-print("thank you for using the elevator - have a great day!")
-time.sleep(5)
-exit()
 
-'''
+# end of script
